@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   before_action :authenticate_user!, :only => [:new, :create]
 
   def new
@@ -12,13 +13,12 @@ class PostsController < ApplicationController
     @post.group = @group
     @post.user = current_user
 
-   if @post.save
-      redirect_to groups_path(@group)
+     if @post.save
+       redirect_to groups_path(@group)
 
-  else
-     render :new
-  end
-
+     else
+       render :new
+     end
   end
 
   private
@@ -26,4 +26,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content)
   end
+  
 end
